@@ -82,6 +82,11 @@ body {
     color: rgb(233,50,117);
 }
 
+/* checkpoint 9 assignment rule */
+
+.links-container .navbar-link:active {
+    background-color: white; 
+}
 /* Medium and small screens (640px) */
 @media (min-width: 640px) {
     html {
