@@ -36,15 +36,22 @@ body.landing {
     text-shadow: 1px 1px 0px rgb(58,23,63);
 }
 
+
 .selling-points {
-    position: relative;
-}
+     position: relative;
+     display: table;
+     width: 100%;
+     -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+     box-sizing: border-box; 
+ }
 
 .point {
     position: relative;
     padding: 2rem;
     text-align: center;
-    opacity: 0;
+    opacity: 1;
+    transition-property: opacity;
     -webkit-transform: scaleX(0.9) translateY(3rem);
     -moz-transform: scaleX(0.9) translateY(3rem);
     transform: scaleX(0.9) translateY(3rem);
@@ -54,15 +61,34 @@ body.landing {
     -webkit-transition-delay: 0.2s;
     -moz-transition-delay: 0.2s;
     transition-delay: 0.2s;
+    
 }
+.point:hover {
+/*    opacity: 1;*/
+    color: #f7e4f2;
+    /*I like this but don't know why it does it like this!*/
+   -webkit-transform: rotate(360deg) scale(1.3);
+   -moz-transform: rotate(360deg) scale(1.3);
+ 
+}
+
+
+
 
 .point .point-title {
     font-size: 1.25rem;
 }
 
-.ion-music-note, 
-.ion-radio-waves,
-.ion-iphone {
+.point .ion-music-note, 
+.point .ion-radio-waves,
+.point .ion-iphone {
     color: rgb(233,50,117);
     font-size: 5rem;
+    transition-property: text-shadow;
+    transition-duration: .5s;
+}
+.ion-music-note:hover, 
+.ion-radio-waves:hover,
+.ion-iphone:hover {
+    text-shadow: 1px 1px 2px white;      
 }
