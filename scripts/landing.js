@@ -1,32 +1,57 @@
-//Refactor the individual style calls of the landing.js script to be a single function named revealPoint that:
-//takes a single argument: the index of the points class node element, and
-//gets called in a for loop.
+var pointsArray = document.getElementsByClassName('point');
+var points = document.getElementsByClassName('point');
 
- var points = document.getElementsByClassName('point');
- var revealPoint = function(ind) {
-                   points[ind].style.opacity = 1;
-                   points[ind].style.transform = "scaleX(1) translateY(0)";
-                   points[ind].style.msTransform = "scaleX(1) translateY(0)";
-                   points[ind].style.WebkitTransform = "scaleX(1) translateY(0)";
-               };
+ function revealPoint(element) {
+                   element.style.opacity = 1;
+                   element.style.transform = "scaleX(1) translateY(0)";
+                   element.style.msTransform = "scaleX(1) translateY(0)";
+                   element.style.WebkitTransform = "scaleX(1) translateY(0)";
+               }
                
- 
-      for (i = 0; i<points.length; i++) {  
-        revealPoint(i);
-      
-      } 
+  forEach(points,revealPoint);
+    
+     
       
 window.onload = function() {
     if (window.innerHeight > 950) {
-        revealPoint(points);
+        animatePoints(pointsArray);
     }
     var sellingPoints = document.getElementsByClassName('selling-points')[0];
     var scrollDistance = sellingPoints.getBoundingClientRect().top - window.innerHeight + 200;
     window.addEventListener("scroll", function(event) {
         if (document.documentElement.scrollTop || document.body.scrollTop >= scrollDistance) {
-            revealPoint(points);
-        };
+            animatePoints(pointsArray);
+        }
     });
 }
 
             
+var animatePoints = function(points) {
+               var points = document.getElementsByClassName('point');
+               
+               var revealFirstPoint = function() {
+                   points[0].style.opacity = 1;
+                   points[0].style.transform = "scaleX(1) translateY(0)";
+                   points[0].style.msTransform = "scaleX(1) translateY(0)";
+                   points[0].style.WebkitTransform = "scaleX(1) translateY(0)";
+               };
+               
+               var revealSecondPoint = function() {
+                   points[1].style.opacity = 1;
+                   points[1].style.transform = "scaleX(1) translateY(0)";
+                   points[1].style.msTransform = "scaleX(1) translateY(0)";
+                   points[1].style.WebkitTransform = "scaleX(1) translateY(0)";
+               };
+               
+               var revealThirdPoint = function() {
+                   points[2].style.opacity = 1;
+                   points[2].style.transform = "scaleX(1) translateY(0)";
+                   points[2].style.msTransform = "scaleX(1) translateY(0)";
+                   points[2].style.WebkitTransform = "scaleX(1) translateY(0)";
+               };
+               
+               revealFirstPoint();
+               revealSecondPoint();
+               revealThirdPoint();
+            
+           };
