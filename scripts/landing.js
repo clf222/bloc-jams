@@ -1,5 +1,5 @@
 var pointsArray = document.getElementsByClassName('point');
-var points = document.getElementsByClassName('point');
+
 
  function revealPoint(element) {
                    element.style.opacity = 1;
@@ -8,7 +8,7 @@ var points = document.getElementsByClassName('point');
                    element.style.WebkitTransform = "scaleX(1) translateY(0)";
                }
                
-  forEach(points,revealPoint);
+  forEach(pointsArray,revealPoint);
     
      
       
@@ -27,7 +27,7 @@ window.onload = function() {
 
             
 var animatePoints = function(points) {
-               var points = document.getElementsByClassName('point');
+              
                
                var revealFirstPoint = function() {
                    points[0].style.opacity = 1;
