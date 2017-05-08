@@ -116,6 +116,8 @@ var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></
 //    
 //}
 //  
-//  
+//  var albumArt = document.getElementsByClassName('album-cover-art');
+    albumArt.addEventListener('click', changeMe, false);
+
 
 
