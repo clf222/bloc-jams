@@ -102,9 +102,9 @@ var nextSong = function(album,song){
     
   //window.alert("next index is "+ currentIndex);
     var lastSongNumber = currentlyPlayingSongNumber;
-    setSong(lastSongNumber+1); /*not sure here */
-//    currentlyPlayingSongNumber = currentIndex + 1;
-//    currentSongFromAlbum = currentAlbum.songs[currentIndex];
+  //  setSong(lastSongNumber+1); /*not sure here */
+    currentlyPlayingSongNumber = currentIndex + 1;
+    currentSongFromAlbum = currentAlbum.songs[currentIndex];
     updatePlayerBarSong();
     var $nextSongNumberCell = getSongNumberCell(currentlyPlayingSongNumber);
    
@@ -128,14 +128,12 @@ var previousSong = function() {
     var lastSongNumber = currentlyPlayingSongNumber;
 
     // Set a new current song
-    setSong(currentSongIndex +1);
-//    currentlyPlayingSongNumber = currentSongIndex + 1;
-//    currentSongFromAlbum = currentAlbum.songs[currentSongIndex];
-
-    // Update the Player Bar information
+    //setSong(currentSongIndex +1);
+    currentlyPlayingSongNumber = currentSongIndex + 1;	   
+    currentSongFromAlbum = currentAlbum.songs[currentSongIndex];
     updatePlayerBarSong();
 
-    var $nextSongNumberCell = getSongNumberCell(currentlyPlayingSongNumber+1);
+    var $nextSongNumberCell = getSongNumberCell(currentlyPlayingSongNumber);
     var $lastSongNumberCell = getSongNumberCell(lastSongNumber);
 
     $nextSongNumberCell.html(pauseButtonTemplate);
