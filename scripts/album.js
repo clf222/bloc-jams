@@ -106,19 +106,21 @@ var trackIndex = function(album, song) {
     return album.songs.indexOf(song);
 };
 var nextSong = function(album,song){
-    var currentIndex = trackIndex(currentAlbum, currentSongFromAlbum);
-    currentIndex++;
+    var currentSongIndex = trackIndex(currentAlbum, currentSongFromAlbum);
+    currentSongIndex++;
     //window.alert(currentIndex);
-    if (currentIndex >= currentAlbum.songs.length) {
-        currentIndex = 0;
+    if (currentSongIndex >= currentAlbum.songs.length) {
+        currentSongIndex = 0;
     }  
     
   
     var lastSongNumber = currentlyPlayingSongNumber;
-    currentlyPlayingSongNumber = currentIndex + 1;
-    currentSongFromAlbum = currentAlbum.songs[currentIndex];
-    currentSoundFile.play();
+    
+    //currentlyPlayingSongNumber = currentIndex + 1;
+    //currentSongFromAlbum = currentAlbum.songs[currentIndex];
+    setSong(currentSongIndex + 1);
     updatePlayerBarSong();
+    currentSoundFile.play();
     var $nextSongNumberCell = getSongNumberCell(currentlyPlayingSongNumber);
    
     //window.alert($nextSongNumberCell);
@@ -141,12 +143,12 @@ var previousSong = function() {
     var lastSongNumber = currentlyPlayingSongNumber;
 
     // Set a new current song
-    //setSong(currentSongIndex +1);
-    currentlyPlayingSongNumber = currentSongIndex + 1;	   
-    currentSongFromAlbum = currentAlbum.songs[currentSongIndex];
-    currentSoundFile.play();
+    setSong(currentSongIndex +1);
+    //currentlyPlayingSongNumber = currentSongIndex + 1;	   
+  //  currentSongFromAlbum = currentAlbum.songs[currentSongIndex];
+ 
     updatePlayerBarSong();
-
+    currentSoundFile.play();
     var $nextSongNumberCell = getSongNumberCell(currentlyPlayingSongNumber);
     var $lastSongNumberCell = getSongNumberCell(lastSongNumber);
 
@@ -161,6 +163,7 @@ var updatePlayerBarSong = function() {
    $('.currently-playing .artist-name').text(currentAlbum.artist);
    $('.currently-playing .artist-song-mobile').text(currentSongFromAlbum.title + " - " + currentAlbum.artist);
    $('.main-controls .play-pause').html(playerBarPauseButton);
+   
     
 };
 
