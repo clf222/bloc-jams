@@ -207,16 +207,18 @@ var getSongNumberCell = function(number){
 //Pause the song
 
 var togglePlayFromPlayerBar = function() {
-    if ((currentSoundFile.isPaused()=== true) && $(this).hasClass('.ion-play')) {
+    if (currentSoundFile.isPaused()) {
         console.log('first if');
+       var $songNumberCell = getSongNumberCell(currentlyPlayingSongNumber);
        $songNumberCell.html(pauseButtonTemplate);
        $('.main-controls .play-pause').html(playerBarPauseButton);
         currentSoundFile.play();      
-    }
-    if ((currentSoundFile.isPaused() === false) && $(this).hasClass('.ion-pause')) {
+    } else if 
+        (!currentSoundFile.isPaused()) {
         console.log('second if');
-       $songNumberCell.html(playButtonTemplate);
-         $('.main-controls .play-pause').html(playerBarPauseButtonButton);
+        var $songNumberCell = getSongNumberCell(currentlyPlayingSongNumber);
+        $songNumberCell.html(playButtonTemplate);
+         $('.main-controls .play-pause').html(playerBarPlayButton);
         currentSoundFile.pause();
         } 
 };
