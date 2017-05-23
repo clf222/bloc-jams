@@ -27,19 +27,23 @@ var createSongRow = function(songNumber, songName, songLength) {
       if (currentlyPlayingSongNumber !== null) {
           var currentlyPlayingCell = getSongNumberCell(currentlyPlayingSongNumber);
           currentlyPlayingCell.html(currentlyPlayingSongNumber);
-          
+         
       }  
       if (currentlyPlayingSongNumber !== songNumber) {
            $(this).html(pauseButtonTemplate);
             setSong(songNumber);
           //play current sound file
           // currentSoundFile = currentSongFromAlbum.audioUrl;
-          console.log(currentSoundFile);
+        
           currentSoundFile.play();
           updatePlayerBarSong();
           updateSeekBarWhileSongPlays();
-       
-      } else if  (currentlyPlayingSongNumber === songNumber) {      
+          var $volumeFill = $('.volume .fill');
+          var $volumeThumb = $('.volume .thumb');
+          $volumeFill.width(currentVolume + '%');
+          $volumeThumb.css({left: currentVolume + '%'});            
+      } else if  
+          (currentlyPlayingSongNumber === songNumber) {      
           if(currentSoundFile.isPaused()){
             $(this).html(pauseButtonTemplate);
             $('.main-controls .play-pause').html(playerBarPlayButton);
@@ -133,6 +137,12 @@ var setupSeekBars = function() {
         var offSetX = event.pageX - $(this).offset().left;
         var barWidth = $(this).width();
         var seekBarFillRatio = offSetX / barWidth; 
+          if ($seekBar.parent().attr('class') == 'seek-control' ) {
+                seek(seekBarFillRatio*currentSoundFile.getDuration());
+            } else  {
+                //seekbar clicked volume 
+                setVolume(seekBarFillRatio*100);
+            }
         updateSeekPercentage($(this), seekBarFillRatio);    
     });
     $seekBars.find('.thumb').mousedown(function(event) {
@@ -141,13 +151,14 @@ var setupSeekBars = function() {
             var offsetX = event.pageX - $seekBar.offset().left;
             var barWidth = $seekBar.width();
             var seekBarFillRatio = offsetX / barWidth;
-            var time = seekBarFillRatio * 100;
-            if ($seekBar.parents().hasClass('currently-playing') ) {
-                seek(time);
-            } else {
+          
+            if ($seekBar.parent().attr('class') == 'seek-control' ) {
+                seek(seekBarFillRatio*currentSoundFile.getDuration());
+            } else  {
                 //seekbar clicked volume 
-                setVolume(time);
+                setVolume(seekBarFillRatio*100);
             }
+          
             
             updateSeekPercentage($seekBar, seekBarFillRatio);
         });
