@@ -9,6 +9,8 @@ var currentSoundFile = null;
 var currentVolume = 80;
 
 var createSongRow = function(songNumber, songName, songLength) {
+   
+  songLength = filterTimeCode(songLength);
   var template =
     '<tr class="album-view-song-item">'
   + '  <td class="song-item-number" data-song-number="'  + songNumber + '">'+ songNumber + '</td>'
@@ -117,6 +119,7 @@ var updateSeekBarWhileSongPlays = function() {
             var $seekBar = $('.seek-control .seek-bar');
 
             updateSeekPercentage($seekBar, seekBarFillRatio);
+            setCurrentTimeInPlayerBar(this.getTime());
         });
     }
 };
@@ -235,6 +238,7 @@ var updatePlayerBarSong = function() {
    $('.currently-playing .artist-name').text(currentAlbum.artist);
    $('.currently-playing .artist-song-mobile').text(currentSongFromAlbum.title + " - " + currentAlbum.artist);
    $('.main-controls .play-pause').html(playerBarPauseButton);
+   setTotalTimeInPlayerBar(currentSongFromAlbum.duration);
 
 
 };
@@ -288,6 +292,34 @@ var togglePlayFromPlayerBar = function() {
         currentSoundFile.pause();
       }
 }
+
+var setCurrentTimeInPlayerBar = function(currentTime) {
+    //sets the text of the element with the .current-time class to the current time in the song.
+    // add to updateSeekBarWhileSongPlays() so currentTime updates with songplayback
+     var time = filterTimeCode(currentTime);
+    $('.current-time').text(time);
+};
+
+var setTotalTimeInPlayerBar = function(totalTime) {
+    //sets the text of the element with the .total-time class to the length of the song.
+    //add to updatePlayerBarSong so total time is set when a song first plays
+    var time = filterTimeCode(totalTime);
+    $('.total-time').text(time);
+    
+};
+
+var filterTimeCode = function(timeInSeconds) {
+    var time =parseFloat(timeInSeconds);
+    var minutes = Math.floor(time/60);
+    var seconds = Math.round(time - minutes*60);
+    if (seconds < 10) {
+        seconds = "0"+seconds;
+    }
+    return minutes + ":" +seconds;    
+};
+
+//4. Wrap the arguments passed to setCurrentTimeInPlayerBar() and setTotalTimeInPlayerBar() in a filterTimeCode() call so the time output below the seek bar is formatted.
+//5. Wrap the songLength variable in createSongRow() in a filterTimeCode() call so the time lengths are formatted
 
 $(document).ready(function() {
      setCurrentAlbum(albumPicasso);
