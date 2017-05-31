@@ -151,11 +151,11 @@ var setupSeekBars = function() {
     $seekBars.find('.thumb').mousedown(function(event) {
         var $seekBar = $(this).parent();
         $(document).bind('mousemove.thumb', function(event) {
-            var offsetX = event.pageX - $seekBars.offset().left;
-            var barWidth = $seekBars.width();
+            var offsetX = event.pageX - $seekBar.offset().left;
+            var barWidth = $seekBar.width();
             var seekBarFillRatio = offsetX / barWidth;
 
-            if ($seekBars.parent().attr('class') == 'seek-control' ) {
+            if ($seekBar.parent().attr('class') == 'seek-control' ) {
                 seek(seekBarFillRatio*currentSoundFile.getDuration());
             } else  {
                 //seekbar clicked volume
